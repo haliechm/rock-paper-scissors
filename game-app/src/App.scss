@@ -1,38 +1,210 @@
 .App {
   text-align: center;
+  font-family: "Allerta Stencil";
+  font-size: 22px;
+  background-color: rgb(221, 221, 221);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.center {
+  height: 100vh;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.home-screen-img {
+  width: 10%;
+  margin: 1%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#top-row {
+  margin-top: 14%;
 }
+
+#second-row{
+  margin-top: 5%;
+}
+
+.bi-arrow-right-circle-fill {
+  font-size: 50px;
+}
+
+a { color: inherit !important;} 
+a:hover {color: #FD2724 !important;}
+
+
+.grid-container {
+  display: grid;
+  grid-gap: 0px;
+  grid-template-columns: 6% 92% 2%;
+  grid-template-rows: 18% 82%;
+  height: 100vh;
+  width: 99vw;
+}
+
+.word {
+  word-break: break-all;
+}
+
+.rock {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  font-size: 90px;
+  color: #646464;
+}
+
+.paper {
+  grid-column: 2;
+  grid-row: 1;
+  font-size: 60px;
+  color: #F8F7ED;
+}
+
+.scissors {
+  grid-column: 3;
+  grid-row: 1 / 3;
+  font-size: 48px;
+  color: #FB2625;
+}
+
+.main-content {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.main-content-grid {
+  display: grid;
+  grid-gap: 0px;
+  grid-template-columns: 10% 32% 16% 32% 10%;
+  grid-template-rows: 20% 50% 15% 13%;
+  height: 100%;
+  width: 100%;
+}
+
+.choice-box {
+  height: 100%;
+}
+
+.choice-boxes-player {
+  grid-column: 2;
+  grid-row: 1;
+  // background-color: pink;
+}
+
+.choice-boxes-opponent {
+  grid-column: 4;
+  grid-row: 1;
+}
+
+// .hovered-choice {
+//   background-color: #F8F7ED;
+// }
+
+.game-box {
+  border-width: 0px 5px 5px 5px;
+  border-style: solid;
+}
+
+.game-box-player {
+  grid-column: 2;
+  grid-row: 2;
+  background-color: #F8F7ED;
+}
+
+.game-box-opponent {
+  grid-column: 4;
+  grid-row: 2;
+  background-color: #646464;
+}
+
+#shoot-button {
+  margin-top: 5px;
+  grid-column: 3;
+  grid-row: 3;
+  // background-color: yellow;
+  // border: 5px solid orange !important;
+  // color: orange !important;
+  width: 70%;
+  margin-left: 25%;
+}
+
+
+#shoot-button {color:#FB2625;background:#F8F7ED;border-width:2px;border-style: solid;border-color: #454545;position:relative;margin:1em;display:inline-block;padding:0.5em 1em;transition:all 0.3s ease-in-out;text-align:center;
+font-family:comfortaa;font-weight:bold}
+#shoot-button:before, #shoot-button:after {content:'';display:block;position:absolute;border-color:#454545;box-sizing:border-box;border-style:solid;width:1em;height:1em;transition:all 0.3s ease-in-out}
+#shoot-button:before {top:-6px;left:-6px;border-width:2px 0 0 2px;z-index:5;}
+#shoot-button:after {bottom:-6px;right:-6px;border-width:0 2px 2px 0;}
+#shoot-button:hover:before, #shoot-button:hover:after {width:calc(100% + 12px);
+  height:calc(100% + 12px);border-color:#F8F7ED}
+#shoot-button:hover {color:#353535;background-color:#F8F7ED;border-color:#F8F7ED}
+.panel {max-width:960px;text-align:center;position:relative;margin:auto;}
+
+#shoot-button {color:#FB2625;border-color:#FB2625}
+#shoot-button:before, #shoot-button:after  {border-color:#FB2625}
+#shoot-button:hover:before, #shoot-button:hover:after {width:calc(100% + 12px);
+  height:calc(100% + 12px);border-color:#FB2625;transform:rotateY(180deg)}
+#shoot-button:hover {color:#FB2625;background-color:#F8F7ED;border-color:#FB2625}
+#shoot-button  {max-width:960px;text-align:center;position:relative;margin:auto;}
+
+.score {
+  // height: 100%;
+  position: relative;
+  top: 20px;
+  // padding-top: 10%;
+}
+.wins {
+  grid-column: 2;
+  grid-row: 4;
+}
+
+.draws {
+  grid-column: 3;
+  grid-row: 4;
+}
+
+.losses {
+  grid-column: 4;
+  grid-row: 4;
+}
+
+.end-game-button {
+  grid-column: 5;
+  grid-row: 4;
+}
+
+#result {
+  grid-column: 3;
+  grid-row: 2;
+  margin-top: 50%;
+}
+
+.choice-boxes-container {
+  display: grid;
+  grid-gap: 0px;
+  grid-template-columns: 33.3% 33.3% 33.3%;
+  grid-template-rows: 100%;
+  height: 100%;
+  width: 100%;
+}
+
+
+.rock-choice-boxes {
+  grid-column: 1;
+  grid-row: 1;
+  border: 5px solid black;
+}
+
+.paper-choice-boxes {
+  grid-column: 2;
+  grid-row: 1;
+  border-width: 5px 0px;
+  border-style: solid;
+}
+
+.scissors-choice-boxes {
+  grid-column: 3;
+  grid-row: 1;
+  border: 5px solid black;
+}
+
+
+
