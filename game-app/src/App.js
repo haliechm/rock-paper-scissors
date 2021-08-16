@@ -1,7 +1,7 @@
 import "./App.scss";
 import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom";
-import { Home, Game } from "./components";
+import { Home, Game, GameResults } from "./components";
 import { GameContext } from "./util";
 
 function App() {
@@ -9,12 +9,21 @@ function App() {
     "hovering_question_mark"
   );
   const [clickedChoice, setClickedChoice] = useState("hovering_question_mark");
+  const [numWins, setNumWins] = useState(0);
+  const [numLosses, setNumLosses] = useState(0);
+  const [numDraws, setNumDraws] = useState(0);
 
   const GameContextValues = {
     hoveringChoice: hoveringChoice,
     changeHoveringChoice: setHoveringChoice,
     clickedChoice: clickedChoice,
     changeClickedChoice: setClickedChoice,
+    numWins: numWins,
+    changeNumWins: setNumWins,
+    numLosses: numLosses,
+    changeNumLosses: setNumLosses,
+    numDraws: numDraws,
+    changeNumDraws: setNumDraws,
   };
 
   return (
@@ -24,7 +33,7 @@ function App() {
           <Route exact path="/" component={Home}></Route>
           <Route exact path="/home" component={Home}></Route>
           <Route exact path="/game" component={Game}></Route>
-          <Route exact path="/game-results" component={Game}></Route>
+          <Route exact path="/game-results" component={GameResults}></Route>
         </Switch>
       </div>
     </GameContext.Provider>

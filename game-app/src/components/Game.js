@@ -22,8 +22,6 @@ const styles = {
 };
 
 export default function Game(props) {
-  const numWins = 4;
-
   const gameContext = useContext(GameContext);
   const [results, setResults] = useState("");
   const [userCorrectImage, setUserCorrectImage] = useState(question_mark);
@@ -31,9 +29,25 @@ export default function Game(props) {
     useState(question_mark);
   const [choice, setChoice] = useState("");
   const [opponentChoice, setOpponentChoice] = useState("");
+  const [buttonText, setButtonText] = useState("SHOOT!");
 
   let opponentInt = -1;
   let iterator = -1;
+
+  function buttonClicked() {
+    buttonText === "SHOOT!" ? shootButtonClicked() : nextRoundButtonClicked();
+  }
+
+  function nextRoundButtonClicked() {
+    gameContext.changeHoveringChoice("hovering_question_mark");
+    gameContext.changeClickedChoice("hovering_question_mark");
+    setUserCorrectImage(question_mark);
+    setOpponentCorrectImage(question_mark);
+    setChoice("");
+    setOpponentChoice("");
+    setButtonText("SHOOT!");
+  }
+
   function shootButtonClicked() {
     // turn gamecontext clicked into int
     let userInt = convertToInt(gameContext.clickedChoice);
@@ -51,18 +65,12 @@ export default function Game(props) {
     // used for iteration
     iterateChoiceBoxes();
 
-    setTimeout(() => getEndResults(resultInt, opponentInt), 3300);
-
-    // display 3 2 1 in results
-    // display correct picture in each box
-    // display win/lose/draw in results
-    // update scoreboard
-    // reset button shows up in place of shoot button
+    // gets results of game after 3 seconds
+    setTimeout(() => getEndResults(resultInt, opponentInt), 3200);
   }
 
   let counter = 3000;
   function iterateChoiceBoxes() {
-    console.log("ITERATOR: ", iterator);
     const choices = ["hovering_rock", "hovering_paper", "hovering_scissors"];
     const choiceImages = [rock, paper, scissors];
 
@@ -80,13 +88,19 @@ export default function Game(props) {
   function getEndResults(resultInt, opponentInt) {
     if (resultInt === 0) {
       setResults("Draw!");
+      gameContext.changeNumDraws(gameContext.numDraws + 1);
     } else if (resultInt === -2 || resultInt === 1) {
       setResults("Win!");
+      gameContext.changeNumWins(gameContext.numWins + 1);
     } else {
-      setResults("Loser!");
+      setResults("Loss!");
+      gameContext.changeNumLosses(gameContext.numLosses + 1);
     }
 
     setOpponentCorrectImage(getOpponentImage(opponentInt));
+
+    // reset button shows up in place of shoot button
+    setButtonText("NEXT");
   }
 
   function convertToInt(choice) {
@@ -157,14 +171,24 @@ export default function Game(props) {
           </div>
 
           <h2 id="result">{results}</h2>
-          <Button onClick={shootButtonClicked} id="shoot-button">
-            SHOOT!
+          <Button
+            // onClick={shootButtonClicked}
+            onClick={buttonClicked}
+            id="shoot-button"
+            style={{
+              visibility:
+                gameContext.clickedChoice === "hovering_question_mark"
+                  ? "hidden"
+                  : "visible",
+            }}
+          >
+            {buttonText}
           </Button>
-          <p className="score wins">{`Wins: ${numWins}`}</p>
-          <p className="score draws">{`Draws: ${numWins}`}</p>
-          <p className="score losses">{`Losses: ${numWins}`}</p>
+          <p className="score wins">{`Wins: ${gameContext.numWins}`}</p>
+          <p className="score draws">{`Draws: ${gameContext.numDraws}`}</p>
+          <p className="score losses">{`Losses: ${gameContext.numLosses}`}</p>
 
-          <a href="/game-results" className="end-game-button">
+          <a href="/game-results" className="end-game-button" title="end game">
             <i className="bi bi-arrow-right-circle-fill end-game-button"></i>
           </a>
         </div>
