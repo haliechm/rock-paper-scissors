@@ -10,6 +10,7 @@ export default function ChoiceBoxes(props) {
     // gameContext.hoveringChoice = e.currentTarget.id;
     if (props.userBoxes) {
       gameContext.changeHoveringChoice(e.currentTarget.id);
+      // doing this so if nothing has been chosen yet then will still iterate red colors
       if (gameContext.clickedChoice === "hovering_question_mark") {
         e.currentTarget.style.backgroundColor = "#FB2625";
       }

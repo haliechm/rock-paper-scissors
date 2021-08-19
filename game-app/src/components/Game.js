@@ -5,6 +5,7 @@ import { rock, paper, scissors, question_mark } from "../images";
 import { GameContext } from "../util";
 import { ChoiceBoxes, GameBox } from "./";
 import { Button } from "reactstrap";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const styles = {
   fadeInUp: {
@@ -52,9 +53,7 @@ export default function Game(props) {
     // turn gamecontext clicked into int
     let userInt = convertToInt(gameContext.clickedChoice);
     opponentInt = Math.floor(Math.random() * 3); // returns random integer from 0 to 2
-    console.log("OPPONENT INT: ", opponentInt);
     iterator = opponentInt == 2 ? 0 : opponentInt + 1;
-    console.log("ITERATOR: ", iterator);
     let resultInt = userInt - opponentInt;
 
     // used for countdown
@@ -65,7 +64,7 @@ export default function Game(props) {
     // used for iteration
     iterateChoiceBoxes();
 
-    // gets results of game after 3 seconds
+    
     setTimeout(() => getEndResults(resultInt, opponentInt), 3200);
   }
 
@@ -86,15 +85,20 @@ export default function Game(props) {
   }
 
   function getEndResults(resultInt, opponentInt) {
+    // gets results of game after 3 seconds
     if (resultInt === 0) {
+      // THIS IS WORKING HERE BUT CONTEXT IN GAMERESULTS IS NOT WORKING CORRECTLY
       setResults("Draw!");
-      gameContext.changeNumDraws(gameContext.numDraws + 1);
+      gameContext.changeNumDraws(++gameContext.numDraws);
+      console.log("Num draws: ", gameContext.numDraws);
     } else if (resultInt === -2 || resultInt === 1) {
       setResults("Win!");
-      gameContext.changeNumWins(gameContext.numWins + 1);
+      gameContext.changeNumWins(++gameContext.numWins);
+      console.log("Num wins: ", gameContext.numWins);
     } else {
       setResults("Loss!");
-      gameContext.changeNumLosses(gameContext.numLosses + 1);
+      gameContext.changeNumLosses(++gameContext.numLosses);
+      console.log("Num losses: ", gameContext.numLosses);
     }
 
     setOpponentCorrectImage(getOpponentImage(opponentInt));
@@ -188,9 +192,11 @@ export default function Game(props) {
           <p className="score draws">{`Draws: ${gameContext.numDraws}`}</p>
           <p className="score losses">{`Losses: ${gameContext.numLosses}`}</p>
 
-          <a href="/game-results" className="end-game-button" title="end game">
+          {/* <a href="game-results" className="end-game-button" title="end game"> */}
+          <Link to="game-results" className="end-game-button" title="end game">
             <i className="bi bi-arrow-right-circle-fill end-game-button"></i>
-          </a>
+          </Link>
+          {/* </a> */}
         </div>
       </div>
     </StyleRoot>
